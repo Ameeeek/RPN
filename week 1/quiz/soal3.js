@@ -1,12 +1,15 @@
-function hitungJumlahKata(kalimat) {
-    let itung = 0
-    console.log(kalimat.split(" ").length)
-    for(let i = 0; i < kalimat.split(" ").length; i++){
-        itung++ 
-    }
-    return itung 
+function hitungJumlahKata(kalimat) { 
+    return kalimat.split(' ').length
   }
   
+//   function hitungJumlahKata(kalimat) { 
+//     let itung = 0
+//     for(let i = 0; i < kalimat.split(" ").length; i++){
+//         itung++ 
+//     }
+//     return itung 
+//   }
+
   // TEST CASES
   console.log(hitungJumlahKata('I have a dream')); // 4
   console.log(hitungJumlahKata('Never eat shredded wheat or cake')); // 6
