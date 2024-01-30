@@ -5,26 +5,27 @@ Diberikan sebuah function targetTerdekat(arr) yang menerima satu parameter berup
   Jika tidak ditemukan 'x' sama sekali, function akan me-return nilai 0.
 */
 function targetTerdekat(arr) {
-  let x = 0;
-  let o = 0;
-  let near = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] == "o") {
-      o = i;
-    }
-    if (arr[i] == "x") {
-      x = i;
-    }
-    x - 0 != 0 ? near.push(x - o) : 0;
+  let indexO = arr.indexOf('o');
+  let indexX = arr.indexOf('x');
+  
+  if (indexO === -1 || indexX === -1) {
+    return 0;
   }
-  return x == 0
-    ? 0
-    : +near
-        .sort()
-        .map((a) =>
-          a.toString().length > 1 ? a.toString().split("")[1] : a
-        )[0];
+
+  let terpendek = Math.abs(indexO - indexX);
+  
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 'o') {
+      indexO = i;
+    }
+    if (arr[i] === 'x' && Math.abs(indexO - i) < terpendek) {
+      terpendek = Math.abs(indexO - i);
+    }
+  }
+  
+  return terpendek;
 }
+
 
 // TEST CASES
 console.log(targetTerdekat([" ", " ", "o", " ", " ", "x", " ", "x"])); // 3
