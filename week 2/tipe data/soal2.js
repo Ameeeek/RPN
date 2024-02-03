@@ -1,5 +1,13 @@
 //cari faktor persekutuan terbesar
 function fpb(angka1, angka2) {
+    angka1 = Math.abs(angka1)
+    angka2 = Math.abs(angka2)
+    while(angka2){
+      let temp = angka2;
+      angka2 = angka1 % angka2;
+      angka1 = temp 
+    }
+    return angka1
     // you can only write your code here!
   }
   

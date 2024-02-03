@@ -7,16 +7,14 @@ function angkaPrima(angka) {
     return true;
   }
 
-  for (let i = 2; i < Math.sqrt(angka); i++) {
+  for (let i = 2; i < Math.round(angka/2); i++) {
     if (angka % i == 0) {
       return false;
     }
   }
   return true;
 
-  // you can only write your code here!
 }
-
 // TEST CASES
 console.log(angkaPrima(3)); // true
 console.log(angkaPrima(7)); // true
