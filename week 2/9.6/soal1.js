@@ -1,22 +1,26 @@
 function changeMe(arr) {
   // you can only write your code here!
   if (arr.length == 0) return "";
-  let res = ''
+  let res = "";
   for (let i = 0; i < arr.length; i++) {
     res += `
-        ${i+1}. ${arr[i][0]} ${arr[i][1]}: 
+        ${i + 1}. ${arr[i][0]} ${arr[i][1]}: 
         firstName :${arr[i][0]},
         lastName: ${arr[i][1]},
         gender: ${arr[i][2]},
-        age: ${arr[i][3] == undefined ? "Invalid Birth Year" : 2023 - arr[i][3]}
-    `
-    
+        age: ${
+          arr[i][3] == undefined
+            ? "Invalid Birth Year"
+            : new Date().getFullYear() - arr[i][3]
+        }
+    `;
+
     // res.push(person)
   }
-  return res
-//   return res.map((a)=>{
-//     return `1. ${a.firstName} ${a.lastName} \n ${a}`
-//  })
+  return res;
+  //   return res.map((a)=>{
+  //     return `1. ${a.firstName} ${a.lastName} \n ${a}`
+  //  })
 }
 
 // TEST CASES
