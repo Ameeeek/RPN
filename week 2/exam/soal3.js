@@ -9,7 +9,7 @@ function highestScore(students) {
       }
     }
   });
-  return container
+  return container;
 }
 
 // TEST CASE
