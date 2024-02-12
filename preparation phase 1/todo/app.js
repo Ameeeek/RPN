@@ -8,20 +8,33 @@ let cardContents = [];
 
 if (cardContents.length == 0) {
   todoContainer.innerHTML = `
-    <div class="card bg-sky-700 font-bold p-4 rounded-md text-white">
+    <div class="card bg-sky-700 text-sm md:text-lg  font-bold p-4 rounded-md text-white">
     <p>
     todo list mu kosong nih, mulai tambahkan todo list dengan mengetik todo list kamu dan tekan tombol input 
-                </p>
-                </div>
-                `;
+    </p>
+    </div>
+    `;
 }
 
+inputBtn.addEventListener("click", function (e) {
+  if (formContent.value.length < 200 || formContent.value.length > 1) {
+    e.preventDefault();
+    cardContents.push({
+      id: cardContents.length + 1,
+      content: formContent.value,
+    });
+    formContent.value = "";
+    fetch();
+  } else {
+    swal("Error", "teks tidak boleh lebih dari 200 karakter!", "warning");
+  }
+});
+
 newBtn.addEventListener("click", function () {
-  console.log(formContent);
+  formContent.removeAttribute("id", "search");
   formContent.setAttribute("id", "todo");
   inputBtn.classList.add("opacity-100");
   formContent.setAttribute("placeholder", "masukkan todo disini");
-  inputBtn.classList.add("opacity-0");
   fetch();
 });
 
@@ -46,20 +59,7 @@ function fetch() {
     })
     .join("");
 }
-
-inputBtn.addEventListener("click", function (e) {
-  if (formContent.value.length < 200) {
-    e.preventDefault();
-    cardContents.push({
-      id: cardContents.length + 1,
-      content: formContent.value,
-    });
-  } else {
-    swal("Error", "teks tidak boleh lebih dari 200 karakter!", "warning");
-  }
-  fetch();
-});
-
+// });
 function bwa(e) {
   cardContents.splice(e - 1, 1);
   console.log(e - 1);
@@ -67,39 +67,38 @@ function bwa(e) {
 }
 
 filterBtn.addEventListener("click", function () {
-  formContent.setAttribute("id", "search");
-  inputBtn.classList.add("opacity-0");
+  formContent.value = ''
+  formContent.removeAttribute("id", "todo");
   formContent.setAttribute("placeholder", "cari todo");
   formContent.setAttribute("id", "search");
-  if (formContent.value.length == 0) {
+  const searchContent = document.getElementById("search");
+  console.log(searchContent.value.length);
+  if (searchContent.value.length == 0) {
     todoContainer.innerHTML = `
     <div class="card bg-sky-700 font-bold p-4 rounded-md text-white">
     <p>
-    lagi nyari todo list kamu? silahkan ketik todo list mu di form, dan tekan enter untuk mencari 
+    lagi nyari todo list kamu? silahkan ketik todo list mu di form, dan tekan enter untuk mencari
                 </p>
                 </div>
                 `;
-  } else {
-    const searchContent = document.getElementById("search");
-    searchContent.addEventListener("keypress", function (e) {
-      if (e.key == "Enter") {
-        let filtered = cardContents.filter((a) => {
-          return a.content.includes(formContent.value);
-        });
-        todoContainer.innerHTML = filtered
-          .map((content) => {
-            return `
+  } 
+  searchContent.addEventListener("keydown", (e) => {
+    if (e.isComposing == false) {
+      let filtered = cardContents.filter((a) => {
+        return a.content.includes(formContent.value);
+      });
+      todoContainer.innerHTML = filtered
+        .map((content) => {
+          return `
       <div class="card bg-sky-700 font-bold p-4 rounded-md text-white">
       <p>
       ${content.content}
                   </p>
                   </div>
                   `;
-          })
-          .join("");
-      }
-    });
-
-    inputBtn.classList.remove("opacity-100");
-  }
+        })
+        .join("");
+    }
+  });
+  
 });
