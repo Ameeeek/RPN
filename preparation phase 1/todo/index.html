@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+  <body class="m-4">
+    <header>
+      <h1 class="text-center text-4xl text-sky-700 font-black">
+        Simple Web App Todo
+      </h1>
+    </header>
+    <main class="m-8">
+      <div class="input">
+        <div class="choose flex justify-center text-center">
+          <button
+            type="button"
+            class="p-4 text-white font-black bg-sky-700 active:text-black active:bg-white"
+            id="enter"
+          >
+            input todo
+          </button>
+          <button
+            type="button"
+            class="p-4 text-white font-black bg-sky-700 active:text-black active:bg-white"
+            id="filter"
+          >
+            search todo
+          </button>
+        </div>
+        <div class="enter flex">
+          <input
+            id="todo"
+            type="text"
+            class="border-4 p-4 grow focus:outline-none border-sky-700 font-bold"
+            placeholder="tulis todo disini"
+          />
+          <button
+            type="button"
+            class="p-4 text-white font-black bg-sky-700 active:text-black active:bg-white"
+            id="btn"
+          >
+            input
+          </button>
+        </div>
+      </div>
+      <div
+        id="container"
+        class="td-container grid grid-cols-4 m-12 gap-4"
+      ></div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
